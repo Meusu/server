@@ -30,30 +30,30 @@ io.sockets.on "connection", (socket) ->
   return unless latestPosition?
   socket.emit "position", latestPosition
 
-sendPosition = (position) ->
+sendPosition = (position, name) ->
   timestamp = new Date(position.timestamp || position.recorded_at)
   return if latestPosition && timestamp < latestPositionTime
   latestPositionTime = timestamp
   latestPosition     = position
 
   _.each sockets, (socket) ->
-    socket.emit "position", position
+    socket.emit "position", position, name
 
-clearPosition = ->
+clearPosition = (name) ->
   latestPositionTime = new Date
   latestPosition     = null
 
   _.each sockets, (socket) ->
-    socket.emit "clear"
+    socket.emit "clear", name
 
 app.post "/report", (req, res) ->
   console.log "got position", req.body
-  _.defer sendPosition, req.body.location
+  _.defer sendPosition, req.body.location, req.body.name
   res.end "Thanks brah!"
 
 app.post "/clear", (req, res) ->
   console.log "clearing position", req.body
-  _.defer clearPosition
+  _.defer clearPosition, req.body.name
   res.end "Thanks brah!"
 
 port = Number(process.env.PORT || 5000)
