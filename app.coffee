@@ -14,9 +14,18 @@ app.use express.static(__dirname + "/public")
 # Sockets code
 
 sockets = []
+latestPositions = {}
 latestPositionTime = new Date
 latestPosition     = null
 latestTimeout      = 4*60*60*1000 # 4 hours..
+
+timeoutPositions = ->
+  keys = []
+
+  _.each latestPositions, ({position, time}, key) ->
+    keys.push key if (new Date) - time > latestTimeout)
+
+  latestPositions = _.pick latestPositions, keys
 
 io.sockets.on "connection", (socket) ->
   sockets.push socket
@@ -24,24 +33,27 @@ io.sockets.on "connection", (socket) ->
   socket.on "disconnect", ->
     sockets = _.without sockets, socket
 
-  if latestPosition? && (new Date) - latestPositionTime > latestTimeout
-    latestPosition = null
+  timeoutPositions()
 
-  return unless latestPosition?
-  socket.emit "position", latestPosition
+  _.each latestPositions, ({position}, name) ->
+    socket.emit "position", position, name
 
 sendPosition = (position, name) ->
   timestamp = new Date(position.timestamp || position.recorded_at)
-  return if latestPosition && timestamp < latestPositionTime
-  latestPositionTime = timestamp
-  latestPosition     = position
+
+  return if latestPositions[name] && timestamp < latestPositions[name].time
+
+
+  latestPositions[name] = {
+    time:     timestamp,
+    position: position
+  }
 
   _.each sockets, (socket) ->
     socket.emit "position", position, name
 
 clearPosition = (name) ->
-  latestPositionTime = new Date
-  latestPosition     = null
+  delete latestPositions[name]
 
   _.each sockets, (socket) ->
     socket.emit "clear", name
