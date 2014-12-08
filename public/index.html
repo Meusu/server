@@ -34,7 +34,7 @@
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="http://secondline-server.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="http://meusu-tracker.herokuapp.com/socket.io/socket.io.js"></script>
 
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?sensor=false">
@@ -56,7 +56,7 @@
 
         var markers = {};
         
-        var socket = io.connect("http://secondline-server.herokuapp.com",{
+        var socket = io.connect("http://meusu-tracker.herokuapp.com",{
           port: 80, transports: ["xhr-polling"]
         });
 
@@ -89,20 +89,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-offset-2 col-md-8 text-center bg-tracker">
-          <h3>Original Big 7 Mothers Day Parade</h3>
-          <span class="help-block">"We Wrote The Book Of Love"</span>
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#tracker" data-toggle="tab">Tracker</a></li>
-            <li><a href="#social" data-toggle="tab">Social feed</a></li>
-          </ul>
-        
           <div class="tab-content">
             <div class="tab-pane active" id="tracker">
               <div id="map-canvas"/></div>
-            </div>
-            <div class="tab-pane text-center" id="social">
-              <a class="twitter-timeline" href="https://twitter.com/search?q=%23secondline" data-widget-id="457298748150796290">#secondline Twitter Feed</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
           </div>
         </div>
