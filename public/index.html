@@ -54,35 +54,31 @@
         });
         route.setMap(map);
 
-        var marker = null;
+        var markers = {};
         
         var socket = io.connect("http://secondline-server.herokuapp.com",{
           port: 80, transports: ["xhr-polling"]
         });
 
-        socket.on("clear", function () {
-          if (marker) {
-            marker.setMap(null);
-            marker = null;
+        socket.on("clear", function (name) {
+          if (markers[name]) {
+            markers[name].setMap(null);
+            delete markers[name];
           }
         });
 
-        socket.on("position", function (position) {
-          if (marker) {
-            marker.setMap(null);
-            marker = null;
-          }
-
+        socket.on("position", function (position, name) {
           var position = new google.maps.LatLng(position.latitude, position.longitude);
 
-          marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: "position"
-          });
-
-          map.setCenter(position);
-          map.setZoom(15);
+          if (!markers[name]) {
+            markers[name] = new google.maps.Marker({
+              position: position,
+              map: map,
+              title: "position"
+            });
+          } else {
+            markers[name].setPosition(position);
+          }
         });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
