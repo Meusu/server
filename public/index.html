@@ -52,7 +52,7 @@
         var markers = {};
         
         var socket = io.connect("http://meusu-tracker.herokuapp.com",{
-          port: 80, transports: ["xhr-polling"]
+          port: 80
         });
 
         socket.on("clear", function (name) {
