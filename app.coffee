@@ -23,7 +23,7 @@ timeoutPositions = ->
   keys = []
 
   _.each latestPositions, ({position, time}, key) ->
-    keys.push key if (new Date) - time > latestTimeout
+    keys.push key unless (new Date) - time > latestTimeout
 
   console.log "outdated keys", keys
 
