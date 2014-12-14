@@ -27,6 +27,8 @@ timeoutPositions = ->
 
   latestPositions = _.pick latestPositions, keys
 
+  console.log "latest positions after timeout", latestPositions
+
 io.sockets.on "connection", (socket) ->
   sockets.push socket
 
@@ -45,11 +47,12 @@ sendPosition = (position, name) ->
 
   return if latestPositions[name] && timestamp < latestPositions[name].time
 
-
   latestPositions[name] = {
     time:     timestamp,
     position: position
   }
+
+  console.log "new latest position", latestPositions
 
   _.each sockets, (socket) ->
     socket.emit "position", position, name
