@@ -25,6 +25,8 @@ timeoutPositions = ->
   _.each latestPositions, ({position, time}, key) ->
     keys.push key if (new Date) - time > latestTimeout
 
+  console.log "outdated keys", keys
+
   latestPositions = _.pick latestPositions, keys
 
   console.log "latest positions after timeout", latestPositions
