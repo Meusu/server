@@ -52,7 +52,6 @@ sendPosition = (position, name) ->
   }
 
   _.each sockets, (socket) ->
-    console.log "sending pos", position, name
     socket.emit "position", position, name
 
 clearPosition = (name) ->
