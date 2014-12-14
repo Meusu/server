@@ -35,6 +35,8 @@ io.sockets.on "connection", (socket) ->
 
   timeoutPositions()
 
+  console.log "sending latest positions", latestPositions
+
   _.each latestPositions, ({position}, name) ->
     socket.emit "position", position, name
 
