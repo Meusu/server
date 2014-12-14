@@ -43,7 +43,10 @@ io.sockets.on "connection", (socket) ->
     socket.emit "position", position, name
 
 sendPosition = (position, name) ->
-  timestamp = new Date(position.timestamp || position.recorded_at)
+  if (position.timestamp || position.recorded_at)
+    timestamp = new Date(position.timestamp || position.recorded_at)
+  else
+    timestamp = new Date
 
   return if latestPositions[name] && timestamp < latestPositions[name].time
 
