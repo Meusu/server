@@ -2,38 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
     <style type="text/css">
       html { height: 100% }
       body {
-        background-image:url(img/background.jpg); background-size: cover;
         height: 100%;
+        width: 468px;
         margin: 0;
         padding: 0 }
 
       #map-canvas {
-        height: 500px;
+        height: 418px;
         margin-top: 23px;
         margin-bottom: 23px;
-      }
-
-      .bg-tracker {
-        padding-top: 13px;
-        padding-bottom: 13px;
-        background-color: rgba(252, 248, 227, 0.79);
-      }
-
-      .nav>li>a {
-        background-color: #eee;
       }
     </style>
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="http://meusu-tracker.herokuapp.com/socket.io/socket.io.js"></script>
 
     <script type="text/javascript"
@@ -81,16 +65,6 @@
     </script>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-offset-2 col-md-8 text-center bg-tracker">
-          <div class="tab-content">
-            <div class="tab-pane active" id="tracker">
-              <div id="map-canvas"/></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="map-canvas"/></div>
   </body>
 </html>
