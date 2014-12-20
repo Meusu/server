@@ -1,12 +1,12 @@
 {
-  "name": "2ndline-server",
-  "description": "2ndline location server",
+  "name": "meusu-server",
+  "description": "meusu location server",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
     "coffee-script": "1.7.1",
     "express": "3.x",
-    "socket.io": "1.2.1",
+    "socket.io": "git://github.com/Meusu/socket.io",
     "underscore": "1.6.0"
   }
 }
