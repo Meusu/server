@@ -1,6 +1,6 @@
 {
   "name": "meusu-server",
-  "description": "meusu location server",
+  "description": "Meusu location server",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
